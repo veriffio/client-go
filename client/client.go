@@ -90,15 +90,15 @@ func (c *Client) Prove(data io.Reader, token []byte) (res []proof.VerifiedRefere
 	if err != nil {
 		return nil, 0, err
 	}
-	var pr webapi.ProveRequest
-	if token != nil {
-		if len(token) != 16 {
-			return nil, 0, errors.New("incorrect token provided")
-		}
-		pr.Token = token
-	} else {
-		pr.Sha2_256 = s2
+	if token == nil {
+		return nil, 0, errors.New("must have a token")
 	}
+	var pr webapi.ProveRequest
+	if len(token) != 16 {
+		return nil, 0, errors.New("incorrect token provided")
+	}
+	pr.Token = token
+	pr.Sha2_256 = s2
 
 	var r webapi.ProveResponse
 	err = c.send(webapi.PathProve, "POST", pr, &r)
