@@ -27,6 +27,7 @@ const (
 	PathProve     = "prove"
 	PathLatest    = "latest"
 	PathFixpoints = "fixpoints"
+	PathHistory   = "history"
 )
 
 // An AddRequest must contain both the sha2 and sha3 hash of the data. It is the clients
