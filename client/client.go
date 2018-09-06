@@ -22,9 +22,9 @@ const (
 )
 
 var (
-	ErrStatusReceived = errors.New("not yet provable, status received")
-	ErrStatusInChain  = errors.New("not yet provable, status in chain")
-	ErrStatusNotFound = errors.New("not yet provable, status not found")
+	ErrStatusInChain      = errors.New("not yet provable, status in chain")
+	ErrStatusNotFound     = errors.New("not yet provable, status not found")
+	ErrServiceUnavailable = errors.New("server is temporary unavailable, please try again later")
 )
 
 // A Client represents a simplified way to interact with the proof.io web service.
@@ -120,8 +120,6 @@ func (c *Client) Prove(data io.Reader, token []byte) (res []proof.VerifiedRefere
 	switch r.Status {
 	case webapi.StatusProvable:
 		break
-	case webapi.StatusReceived:
-		return nil, 0, ErrStatusReceived
 	case webapi.StatusInChain:
 		return nil, 0, ErrStatusInChain
 	default:

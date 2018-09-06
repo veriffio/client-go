@@ -7,7 +7,7 @@ import (
 )
 
 // These constants define the hash functions which are recognized by the package
-// and the strings that must be used to identify them. The  functions are
+// and the strings that must be used to identify them. The functions are
 // implemented as defined in FIPS 180-4 and FIPS-202.
 const (
 	SHA2_256 = "sha2_256"

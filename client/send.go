@@ -68,6 +68,12 @@ func (c *Client) send(pth string, method string, data req, resp interface{}) err
 		return ErrStatusNotFound
 	}
 
+	// 504 may mean that the server is temporary overloaded, we special case this
+	// mainly for testing, but it may be interesting for others too
+	if re.StatusCode == http.StatusServiceUnavailable {
+		return ErrServiceUnavailable
+	}
+
 	// If the status is ok we should be able to parse out the response
 	if re.StatusCode == 200 {
 		return json.Unmarshal(body, resp)

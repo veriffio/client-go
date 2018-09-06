@@ -13,8 +13,6 @@ import (
 
 // Each item can been in one of three different states as described by these constants.
 const (
-	// The item has been recieved by the veriff.io service, but is not yet finally comitted to storage.
-	StatusReceived = "received"
 	// The item has been stored by the server but there are as of yet no external references published.
 	StatusInChain = "chained"
 	// The item is stored in the chain and have references publised at external sources.
